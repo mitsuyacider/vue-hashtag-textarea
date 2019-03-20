@@ -1,0 +1,51 @@
+{
+  "name": "vue-hashtag-textarea",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Highlight hashtags on textarea with vue.js",
+  "author": "Mitsuya Watanabe <mitsuya.watanabe85@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mitsuyacider/vue-hashtag-textarea/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitsuyacider/vue-hashtag-textarea"
+  },
+  "homepage": "https://mitsuyacider.com/",
+  "main": "dist/vue-hashtag-textarea.umd.js",
+  "module": "dist/vue-hashtag-textarea.esm.js",
+  "unpkg": "dist/vue-hashtag-textarea.min.js",
+  "browser": {
+    "./sfc": "src/vue-hashtag-textarea.vue"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "keywords": [
+    "vue",
+    "hashtag",
+    "textarea"
+  ],  
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "minimist": "^1.2.0",
+    "node-sass": "^4.11.0",
+    "rollup": "^1.4.1",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-vue": "^4.7.2",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.6.8",
+    "vue-template-compiler": "^2.6.8"
+  }
+}
