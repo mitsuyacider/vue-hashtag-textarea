@@ -20,7 +20,8 @@
     "./sfc": "src/vue-hashtag-textarea.vue"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/vue-hashtag-textarea.vue"
   ],
   "keywords": [
     "vue",
