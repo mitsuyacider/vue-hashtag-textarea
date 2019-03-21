@@ -80,12 +80,9 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 
 ## Callback Functions
 
-| Functionss |
-|:--|
-|
 ### **onChangeHashtag(obj)**
 
-#### Argument
+##### Argument
 
 * obj : Object
 
@@ -94,35 +91,18 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 |target|String|focusing hashtag|
 |hashtags|Array|hashtag list in the sentence|
 
-#### Description
-Everytime hashtags is inputed in vue-hashtag-textarea,
-values including whole hashtags and current focusing hashtag will be notified by this callback function. If caret is not at hashtag, this callback doesn't be fired.
-|
-|
-### **onChangeHashtag(obj)**
-
-#### Argument
-
-* obj : Object
-
-| Values | Type | Description |
-|:--|:--|:--|
-|target|String|focusing hashtag|
-|hashtags|Array|hashtag list in the sentence|
-
-#### Description
+##### Description
 Everytime hashtags is inputed in vue-hashtag-textarea,
 values including whole hashtags and current focusing hashtag will be notified by this callback function. If caret is not at hashtag, this callback doesn't be fired.
 
 ### **onSelectHashtag(content)**
 
-#### Argument
+##### Argument
 
 * content : String
 
-#### Description
+##### Description
 When hashtag element is selected, this callback function will be fired with the specific hashtag.
-|
 
 ## Browser support
 
