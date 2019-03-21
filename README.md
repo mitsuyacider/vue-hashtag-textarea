@@ -106,19 +106,19 @@ When hashtag element is selected, this callback function will be fired with the 
 
 ## Browser support
 
-#### Desktop
+### Desktop
 | Chrome | Safari | IE / Edge | Firefox | Opera |
 | --- | --- | --- | --- | --- |
 | 72+ | 12+ | ? | 65+ | ? |
 
-#### Mobile
+### Mobile
 | Android webview | Chrome for Android | Safari on iOS | Edge Mobile | Firefox for Android | Opera for Android | Samsung Internet |
 | --- | --- | --- | --- | --- | --- | --- |
 | ? | ? | 12+ | ? | ? | ? | ? |
 
 
-**NOTE:**<br>
-If debugging iOS devices on chrome dev tools, the layout will be failed. In that case, recommend to use Safari browser instead.
+##### NOTE
+<small>If debugging iOS devices on chrome dev tools, the layout will be failed. In that case, recommend to use Safari browser instead.</small>
 
 
 ## License
