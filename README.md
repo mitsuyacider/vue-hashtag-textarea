@@ -1,5 +1,8 @@
 # Highlight hashtags on Vue.js module
 
+[![npm version](https://img.shields.io/npm/v/vue-hashtag-textarea.svg?style=flat&color=blue)](https://www.npmjs.com/package/vue-hashtag-textarea)
+[![npm download](https://img.shields.io/npm/dm/vue-hashtag-textarea.svg?style=flat)](https://www.npmjs.com/package/vue-hashtag-textarea)
+
 ## Features
 * Highlight hastags in textarea
 * Resize textarea automatically
