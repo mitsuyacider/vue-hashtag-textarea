@@ -50,7 +50,7 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
     },
     mounted() {},
     methods: {
-      onChangedHashtag(info) {
+      onChangedHashtag(obj) {
         // NOTE: Everytime hashtags is inputed in vue-hashtag-textarea,
         //       values will be callbacked in this scope
       }
