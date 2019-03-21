@@ -35,7 +35,8 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```js
 <template>
   <div class="container">
-    <vue-hashtag-textarea :option=option v-on:onChangedHashtag="onChangedHashtag" />
+    <vue-hashtag-textarea :option=option v-on:onChangeHashtag="onChangeHashtag"
+    v-on:onSelectHashtag="onSelectHashtag" />
   <div>  
 </template>
 
@@ -46,10 +47,8 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
       return {
         option: {
           textColor: 'black',
-          font: '14px "Noto Sans Japanese", sans-serif',
           hashtagBackgroundColor: '#ffff00',
           hashtagColor: '#ff0000',
-          placeholder: 'Sentence for placeholder #place #holder'
         }
       }
     },
@@ -58,9 +57,12 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
     },
     mounted() {},
     methods: {
-      onChangedHashtag(obj) {
+      onChangeHashtag(obj) {
         // NOTE: Everytime hashtags is inputed in vue-hashtag-textarea,
         //       values will be callbacked in this scope
+      },
+      onSelecthashtag(content) {
+        // TODO:
       }
     },
   }
@@ -76,9 +78,9 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 |hashtagColor|hashtag color|#ff0000|
 |placeholder|placeholder on empty|Sentence for placeholder #place #holder|
 
-## Callback Function
+## Callback Functions
 
-### **onChangedHashtag(obj)**
+### **onChangeHashtag(obj)**
 
 #### Argument
 
@@ -92,6 +94,15 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 #### Description
 Everytime hashtags is inputed in vue-hashtag-textarea,
 values including whole hashtags and current focusing hashtag will be notified by this callback function. If caret is not at hashtag, this callback doesn't be fired.
+
+### **onSelectHashtag(content)**
+
+#### Argument
+
+* content : String
+
+#### Description
+When hashtag element is selected, this callback function will be fired with the specific hashtag.
 
 ## Browser support
 

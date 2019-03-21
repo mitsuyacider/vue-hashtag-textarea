@@ -36,7 +36,6 @@
 
     // NOTE: Textarea layout. Fix position
     &__true-text {
-      z-index: 2;
       border: 0;
       background: transparent;
       position: absolute;
@@ -47,13 +46,7 @@
     }    
 
     &__overlay {
-      color: black;
-      
-      // NOTE: Hashtag layout
-      .hashtag {
-        background: #fff000; 
-        font: $myFont;
-      }        
+      -webkit-tap-highlight-color: transparent; 
     }  
 
     &__overlay, &__true-text {
@@ -76,6 +69,7 @@
 </style>
 
 <script>
+
 export default {
   name: 'VueHashtagTextarea',
   props: {
@@ -87,7 +81,8 @@ export default {
           font: '14px "Noto Sans Japanese", sans-serif',
           hashtagBackgroundColor: 'transparent',
           hashtagColor: '#ff0000',
-          placeholder: 'Sentence for placeholder #place #holder'
+          placeholder: 'Sentence for placeholder #place #holder',
+          isEditMode: false
         }
       )
     }
@@ -95,7 +90,24 @@ export default {
   data() {
     return {
       hashtagList: [],
-      shouldShowPlaceholder: true
+      shouldShowPlaceholder: true,
+      defaultOption: {
+          textColor: 'black',
+          font: '14px "Noto Sans Japanese", sans-serif',
+          hashtagBackgroundColor: 'transparent',
+          hashtagColor: '#ff0000',
+          placeholder: 'Sentence for placeholder #place #holder',
+          isEditMode: true
+      }
+    }
+  },
+  created() {    
+    // NOTE: Set default option if not existence in props
+    for(let key in this.defaultOption) {
+      const value = this.option[key]
+      if (value === undefined) {
+        this.option[key] = this.defaultOption[key]
+      }
     }
   },
   mounted() {    
@@ -110,6 +122,15 @@ export default {
                   };
     
     observer.observe(target, config);
+
+    target.innerText = "#あいう えお #かきく きょうは"
+
+    const overlayElm = document.getElementById('input-overlay')
+    overlayElm.addEventListener("click", this.onSelectHashtag, false);
+  },
+  destroyed() {
+    const overlayElm = document.getElementById('input-overlay')
+    overlayElm.removeEventListener("click", this.onSelectHashtag, false);
   },
   computed: {
     isSafariBrowser: function() {
@@ -126,7 +147,7 @@ export default {
     trueTextStyle: function() {
       let style = {}
       style.font = this.option.font
-      
+      style['z-index'] = this.option.isEditMode ?  2 : -2;
       return style
     },
     overlayStyle: function() {
@@ -140,6 +161,10 @@ export default {
       let style = 'style="'
       style += 'color:' + this.option.hashtagColor + ';'
       style += 'background:' + this.option.hashtagBackgroundColor + ';'
+
+      if (!this.option.isEditMode) {
+        style += 'cursor: default;'
+      }
       style += '"'
 
       return style
@@ -210,11 +235,18 @@ export default {
     diffArray(newVal, oldVal) {
       return newVal.concat(oldVal)
         .filter(item => !oldVal.includes(item));
-    }    
+    },
+    onSelectHashtag(e) {
+      const target = e.target
+      const tagName = target.tagName
+      if (tagName === 'I') {
+        const content = target.textContent
+        this.$emit('onSelectHashtag', content)
+      }
+    }
   },
   watch: {
     hashtagList: function(newVal, oldVal) {
-
       const isEqualVal = JSON.stringify(newVal) === JSON.stringify(oldVal)
       if (!isEqualVal) {
         const hashtagData = {}
@@ -228,7 +260,7 @@ export default {
         }
 
         hashtagData.hashtags = newVal
-        this.$emit('onChangedHashtag', hashtagData)        
+        this.$emit('onChangeHashtag', hashtagData)
       }    
     }
   }
