@@ -82,9 +82,17 @@ Everytime hashtags is inputed in vue-hashtag-textarea,
 values including whole hashtags and current focusing hashtag will be notified by this callback function. If caret is not at hashtag, this callback doesn't be fired.
 
 ## Browser support
+
+#### Desktop
 | Chrome | Safari | IE / Edge | Firefox | Opera |
 | --- | --- | --- | --- | --- |
-| 72+ | 12+ | non-supported | 65+ | non-supported |
+| 72+ | 12+ | ? | 65+ | ? |
+
+#### Mobile
+| Android webview | Chrome for Android | Safari on iOS | Edge Mobile | Firefox for Android | Opera for Android | Samsung Internet |
+| --- | --- | --- | --- | --- | --- | --- |
+| ? | ? | 12+ | ? | ? | ? | ? |
+
 
 #### NOTE
 If debugging iOS devices on chrome dev tools, the layout will be failed. In that case, recommend to use Safari browser instead.
