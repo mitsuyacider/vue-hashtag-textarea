@@ -77,7 +77,9 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ### **onChangedHashtag(obj)**
 
 #### Argument
-obj : Object
+
+* obj : Object
+
 | Values | Type | Description |
 |:--|:--|:--|
 |target|String|focusing hashtag|
