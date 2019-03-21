@@ -117,7 +117,7 @@ When hashtag element is selected, this callback function will be fired with the 
 | ? | ? | 12+ | ? | ? | ? | ? |
 
 
-#### NOTE
+**NOTE:**<br>
 If debugging iOS devices on chrome dev tools, the layout will be failed. In that case, recommend to use Safari browser instead.
 
 
