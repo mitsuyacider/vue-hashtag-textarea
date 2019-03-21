@@ -73,7 +73,9 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 |placeholder|placeholder on empty|Sentence for placeholder #place #holder|
 
 ## Callback Function
+
 ### **onChangedHashtag(obj)**
+
 #### Argument
 obj : Object
 |values|type|description|
