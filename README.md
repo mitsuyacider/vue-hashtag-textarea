@@ -6,8 +6,11 @@
 * Notify inputting hashtag in realtime
 * Support japanese.
 
-![mobile](./mobile.gif)
-![desktop](./desktop.gif)
+| desktop | mobile | 
+| --- | --- | 
+| ![desktop](./desktop.gif)| ![mobile](./mobile.gif) |
+
+
 
 ## Getting started
 ### Download
