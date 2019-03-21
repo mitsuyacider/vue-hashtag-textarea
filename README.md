@@ -6,7 +6,7 @@
 * Notify inputting hashtag in realtime
 * Support japanese.
 
-| desktop | mobile | 
+| Desktop | Mobile | 
 | --- | --- | 
 | ![desktop](./desktop.gif)| ![mobile](./mobile.gif) |
 
@@ -64,7 +64,7 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```
 
 ## Options
-|options|description|default|
+| Options | Description | Default |
 |:--|:--|:--|
 |textColor|ordinary text color|black|
 |font|wave height|14px "Noto Sans Japanese", sans-serif|
@@ -78,7 +78,7 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 
 #### Argument
 obj : Object
-|values|type|description|
+| Values | Type | Description |
 |:--|:--|:--|
 |target|String|focusing hashtag|
 |hashtags|Array|hashtag list in the sentence|
