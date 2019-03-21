@@ -45,7 +45,11 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
     data() {
       return {
         option: {
-          textColor:'#ff0000'
+          textColor: 'black',
+          font: '14px "Noto Sans Japanese", sans-serif',
+          hashtagBackgroundColor: '#ffff00',
+          hashtagColor: '#ff0000',
+          placeholder: 'Sentence for placeholder #place #holder'
         }
       }
     },
