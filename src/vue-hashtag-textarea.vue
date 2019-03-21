@@ -123,8 +123,6 @@ export default {
     
     observer.observe(target, config);
 
-    target.innerText = "#あいう えお #かきく きょうは"
-
     const overlayElm = document.getElementById('input-overlay')
     overlayElm.addEventListener("click", this.onSelectHashtag, false);
   },
