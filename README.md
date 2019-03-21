@@ -6,6 +6,9 @@
 * Notify inputting hashtag in realtime
 * Support japanese.
 
+![mobile](./mobile.gif)
+![desktop](./desktop.gif)
+
 ## Getting started
 ### Download
 Via npm
@@ -26,8 +29,6 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```
 
 ## Hello world
-**NOTE:**
-
 ```js
 <template>
   <div class="container">
