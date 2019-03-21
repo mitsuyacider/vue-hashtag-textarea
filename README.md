@@ -91,4 +91,4 @@ If debugging iOS devices on chrome dev tools, the layout will be failed. In that
 
 
 ## License
-**MIT**
+**[MIT](https://github.com/mitsuyacider/vue-hashtag-textarea/blob/master/LICENSE.txt)**
