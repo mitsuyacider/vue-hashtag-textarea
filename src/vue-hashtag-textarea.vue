@@ -20,18 +20,16 @@
 </template>
 
 <style lang="scss">
-  // TODO: Get proper font. Should load this from local.
-  @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
-  $myFont: 14px 'Noto Sans Japanese', sans-serif;
   $textWidth: 100%;
+  $textPadding: 0 23px;
 
   // NOTE: Component of hashtag textarea
   .hashtag-textarea {
     position: relative;
     overflow: auto;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    min-height: 150px;
+    border-bottom: 1px solid #E4E4E4;
+    background: white;
+    min-height: 120px;
     height: 100%;
 
     // NOTE: Textarea layout. Fix position
@@ -50,9 +48,8 @@
     }  
 
     &__overlay, &__true-text {
-      padding: 10px;
+      padding: $textPadding;
       margin: 0px;
-      font: $myFont;
       height: 100%;
       width: $textWidth;
       white-space: pre-wrap;
@@ -60,7 +57,8 @@
     }
 
     &__placeholder {
-      padding: 10px;
+      font: 14px "HiraKakuProN-W4-AlphaNum";
+      padding: $textPadding;
       position: absolute;
       top: 0;
       color: lightgray;
@@ -74,17 +72,7 @@ export default {
   name: 'VueHashtagTextarea',
   props: {
     option: {
-      type: Object,
-      default: _ => (
-        {
-          textColor: 'black',
-          font: '14px "Noto Sans Japanese", sans-serif',
-          hashtagBackgroundColor: 'transparent',
-          hashtagColor: '#ff0000',
-          placeholder: 'Sentence for placeholder #place #holder',
-          isEditMode: false
-        }
-      )
+      type: Object
     }
   },
   data() {
@@ -93,12 +81,13 @@ export default {
       shouldShowPlaceholder: true,
       defaultOption: {
           textColor: 'black',
-          font: '14px "Noto Sans Japanese", sans-serif',
+          font: '14px "HiraKakuProN-W4-AlphaNum"',
           hashtagBackgroundColor: 'transparent',
           hashtagColor: '#ff0000',
-          placeholder: 'Sentence for placeholder #place #holder',
+          placeholder: '体験談や質問などを書いてみよう。 #でハッシュタグも入れられます。',
           isEditMode: true
-      }
+      },
+      focusedHashtagNode: {}
     }
   },
   created() {    
@@ -200,10 +189,12 @@ export default {
                                     target.innerHTML === '<br>'      
     },
     replaceContent() {
-      const target = document.getElementById('input-true-text');    
-      const content = target.innerText
+      const target = document.getElementById('input-true-text');
+
+      // NOTE: Need to convert html character with escapecharacter
+      const content = this.escapeHtml(target.innerText)
       const contentHTML = target.textContent
-      
+
       // NOTE: Trim line break \n
       const spaceExp = /^\n\n/gm
       const content2 = content.replace(spaceExp, function(match) {
@@ -216,7 +207,8 @@ export default {
       const srcContent = this.isSafariBrowser ? content : content2
       const self = this
       const replaceContent = srcContent.replace(this.regExp, function(match) {
-        const result = '<i ' + self.hashtagStyle + '>' + match + '</i>'        
+        const idStr = ' id=' + self.getUniqueStr()
+        const result = '<i ' + self.hashtagStyle + idStr + '>' + match + '</i>'
         return result
       })
       
@@ -226,37 +218,109 @@ export default {
 
       this.hashtagList = this.getHashtagList(content)      
     },
+    escapeHtml(content) {
+      const escapeHashMap = {
+        "&": "&amp;",
+        "\"": "&quot;",
+        "<": "&lt;",
+        ">": "&gt;"
+      };
+      return content.replace(/[&"<>]/g, function(match) {
+        return escapeHashMap[match];
+      });
+    },    
     getHashtagList(value) {
       const result = value.match(this.regExp)
       return result;
     },
-    diffArray(newVal, oldVal) {
-      return newVal.concat(oldVal)
-        .filter(item => !oldVal.includes(item));
+    getHashtagNodeList() {
+      const target = document.getElementById('input-overlay')
+      const nodes = []      
+      const childNodes = target.childNodes
+      for (let child of childNodes) {
+        nodes.push(child)
+      }
+
+      return nodes
+    },
+    getDiffArrayWithIndex(newVal, oldVal) {
+      const result = {}
+      
+      for(let i = 0 ; i < newVal.length; i++){
+        if(oldVal.indexOf(newVal[i]) === -1 ){
+          result.diffValue = newVal[i]
+          result.index = i
+          break
+        }    
+      }
+
+      return result
     },
     onSelectHashtag(e) {
       const target = e.target
       const tagName = target.tagName
       if (tagName === 'I') {
         const content = target.textContent
-        this.$emit('onSelectHashtag', content)
+        console.log(target)
+        this.$emit('onSelectHashtag', target)
       }
+    },
+    replaceHashtagNodeContent(newValue) {
+      this.focusedHashtagNode.textContent = newValue
+      const trueTarget = document.getElementById('input-true-text');
+      const overlayTarget = document.getElementById('input-overlay');
+      trueTarget.innerText = overlayTarget.innerText
+    },
+    getUniqueStr(){
+      var strong = 1000;
+      return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+    },
+    getHashtagTargetNode(index) {
+      const target = document.getElementById('input-overlay')
+      const nodes = target.childNodes
+      let count = 0
+      let hashtagTarget = {}
+
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i]
+        if (node.tagName === 'I') {
+          if (index === count) {
+            hashtagTarget = node
+            break
+          }
+
+          count++
+        }
+      }
+      return hashtagTarget
     }
   },
   watch: {
     hashtagList: function(newVal, oldVal) {
       const isEqualVal = JSON.stringify(newVal) === JSON.stringify(oldVal)
+
       if (!isEqualVal) {
         const hashtagData = {}
         if (newVal === null) {
           hashtagData.target = ''
         } else if (oldVal === null) {
-          hashtagData.target = newVal[0]
-        } else {
-          const diff = this.diffArray(newVal, oldVal)
-          hashtagData.target = diff.length === 0 ? newVal[newVal.length - 1] : diff[0]
+          // NOTE: Set focused hashtag node
+          const hashtagTarget = this.getHashtagTargetNode(0) 
+          hashtagData.target = hashtagTarget.innerText
+          this.focusedHashtagNode = hashtagTarget
+        } else {          
+          if (newVal.length < oldVal.length) {
+            hashtagData.target = ''
+          } else {
+            // NOTE: Set focused hashtag node
+            const diff = this.getDiffArrayWithIndex(newVal, oldVal)
+            const index = diff.diffValue === undefined ? newVal.length - 1 : diff.index
+            const hashtagTarget = this.getHashtagTargetNode(index)
+            hashtagData.target = hashtagTarget.innerText
+            this.focusedHashtagNode = hashtagTarget
+          }
         }
-
+        
         hashtagData.hashtags = newVal
         this.$emit('onChangeHashtag', hashtagData)
       }    
