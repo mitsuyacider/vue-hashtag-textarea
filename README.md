@@ -38,8 +38,11 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```js
 <template>
   <div class="container">
-    <vue-hashtag-textarea :option=option v-on:onChangeHashtag="onChangeHashtag"
-    v-on:onSelectHashtag="onSelectHashtag" />
+    <vue-hashtag-textarea
+      :option=option
+      v-on:onChangeHashtag="onChangeHashtag"
+      v-on:onSelectHashtag="onSelectHashtag"
+      ref="vueHashtagTextarea" />
   <div>  
 </template>
 
@@ -66,6 +69,9 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
       },
       onSelecthashtag(content) {
         // TODO:
+      },
+      someEventTrigger() {
+        this.$refs.vueHashtagTextarea.replaceHashtagNodeContent('#somehashtag ')
       }
     },
   }
@@ -73,15 +79,25 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```
 
 ## Options
-| Options | Description | Default |
-|:--|:--|:--|
-|textColor|ordinary text color|black|
-|font|wave height|14px "Noto Sans Japanese", sans-serif|
-|hashtagBackgroundColor|background color on hashtag|transparent|
-|hashtagColor|hashtag color|#ff0000|
-|placeholder|placeholder on empty|Sentence for placeholder #place #holder|
+| Options | Type | Description | Default |
+|:--|:--|:--|:--|
+| textColor | String | ordinary text color| black |
+| font | String | wave height | 14px "Noto Sans Japanese", sans-serif |
+| hashtagBackgroundColor | String | background color on hashtag| transparent |
+| hashtagColor | String | hashtag color | #ff0000 |
+| placeholder |  String | placeholder on empty | Sentence for placeholder #place #holder |
+| isEditMode |  Boolean | **true:** enable to edit but cannot select hashtag<br>**false:** enable to select hashtag but cannot edit | true |
 
-## Callback Functions
+## Supported Functions
+### **replaceHashtagNodeContent(content)**
+
+##### Argument
+* content : String
+
+##### Description
+Replace focused hashtag to new hashtag. Please note that the content shouled include hashtag "#" at the head of the word. In addition, if the caret in the textarea is not on one of hashtags, no hashtag is replaced.
+
+## Callback
 
 ### **onChangeHashtag(obj)**
 
