@@ -84,7 +84,7 @@ export default {
           font: '14px "HiraKakuProN-W4-AlphaNum"',
           hashtagBackgroundColor: 'transparent',
           hashtagColor: '#ff0000',
-          placeholder: '体験談や質問などを書いてみよう。 #でハッシュタグも入れられます。',
+          placeholder: 'Sentence for placeholder #place #holder',
           isEditMode: true
       },
       focusedHashtagNode: {}
@@ -237,9 +237,9 @@ export default {
       const target = document.getElementById('input-overlay')
       const nodes = []      
       const childNodes = target.childNodes
-      for (let child of childNodes) {
+      childNodes.forEach((child) => {
         nodes.push(child)
-      }
+      })
 
       return nodes
     },
