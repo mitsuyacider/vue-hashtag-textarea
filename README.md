@@ -38,42 +38,16 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ```js
 <template>
   <div class="container">
-    <vue-hashtag-textarea
-      :option=option
-      v-on:onChangeHashtag="onChangeHashtag"
-      v-on:onSelectHashtag="onSelectHashtag"
-      ref="vueHashtagTextarea" />
+    <vue-hashtag-textarea />
   <div>  
 </template>
 
 <script>
   import VueHashtagTextarea from 'vue-hashtag-textarea'
   export default {
-    data() {
-      return {
-        option: {
-          textColor: 'black',
-          hashtagBackgroundColor: '#ffff00',
-          hashtagColor: '#ff0000',
-        }
-      }
-    },
     components: {
       VueHashtagTextarea,
-    },
-    mounted() {},
-    methods: {
-      onChangeHashtag(obj) {
-        // NOTE: Everytime hashtags is inputed in vue-hashtag-textarea,
-        //       values will be callbacked in this scope
-      },
-      onSelecthashtag(content) {
-        // TODO:
-      },
-      someEventTrigger() {
-        this.$refs.vueHashtagTextarea.replaceHashtagNodeContent('#somehashtag ')
-      }
-    },
+    }
   }
 </script>
 ```
@@ -97,6 +71,31 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ##### Description
 Replace focused hashtag to new hashtag. Please note that the content shouled include hashtag "#" at the head of the word. In addition, if the caret in the textarea is not on one of hashtags, no hashtag is replaced.
 
+##### Example
+
+```js
+<template>
+  <div class="container">
+    <vue-hashtag-textarea
+      ref="vueHashtagTextarea" />
+  <div>  
+</template>
+
+<script>
+  import VueHashtagTextarea from 'vue-hashtag-textarea'
+  export default {
+    components: {
+      VueHashtagTextarea,
+    },
+    methods: {
+      someEventTrigger() {
+        this.$refs.vueHashtagTextarea.replaceHashtagNodeContent('#somehashtag ')
+      }
+    }
+  }
+</script>
+```
+
 ## Callback
 
 ### **onChangeHashtag(obj)**
@@ -114,6 +113,28 @@ Replace focused hashtag to new hashtag. Please note that the content shouled inc
 Everytime hashtags is inputed in vue-hashtag-textarea,
 values including whole hashtags and current focusing hashtag will be notified by this callback function. If caret is not at hashtag, this callback doesn't be fired.
 
+##### Example
+```js
+<template>
+  <div class="container">
+    <vue-hashtag-textarea
+      v-on:onChangeHashtag="onChangeHashtag" />
+  <div>  
+</template>
+
+<script>
+  import VueHashtagTextarea from 'vue-hashtag-textarea'
+  export default {
+    methods: {
+      onChangeHashtag(obj) {
+        // NOTE: Everytime hashtags is inputed in vue-hashtag-textarea,
+        //       values will be callbacked in this scope
+      }
+    }
+  }
+</script>
+```
+
 ### **onSelectHashtag(content)**
 
 ##### Argument
@@ -122,6 +143,39 @@ values including whole hashtags and current focusing hashtag will be notified by
 
 ##### Description
 When hashtag element is selected, this callback function will be fired with the specific hashtag.
+
+##### Example
+```js
+<template>
+  <div class="container">
+    <vue-hashtag-textarea
+      :option=option
+      v-on:onSelectHashtag="onSelectHashtag" />
+  <div>  
+</template>
+
+<script>
+  import VueHashtagTextarea from 'vue-hashtag-textarea'
+  export default {
+    data() {
+      return {
+        option: {
+          isEditMode: false
+        }
+      }
+    },
+    components: {
+      VueHashtagTextarea,
+    },
+    methods: {
+      onSelecthashtag(content) {
+        // TODO:
+      }
+    }
+  }
+</script>
+```
+
 
 ## Browser support
 
@@ -135,10 +189,16 @@ When hashtag element is selected, this callback function will be fired with the 
 | --- | --- | --- | --- | --- | --- | --- |
 | ? | ? | 12+ | ? | ? | ? | ? |
 
-
 ##### NOTE
 <small>If debugging iOS devices on chrome dev tools, the layout will be failed. In that case, recommend to use Safari browser instead.</small>
 
+## Quick Start
+```
+git clone https://github.com/mitsuyacider/vue-hashtag-textarea
+cd vue-hashtag-textarea
+npm install
+vue serve example/App.vue
+```
 
 ## License
 **[MIT](https://github.com/mitsuyacider/vue-hashtag-textarea/blob/master/LICENSE.txt)**
