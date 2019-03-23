@@ -157,7 +157,8 @@ export default {
       return style
     },
     regExp: function() {
-      return /#[Ａ-Ｚａ-ｚA-Za-z一-龥0-9０-９ぁ-ヶｦ-ﾟー]+/g;
+      return /\#(?!\,)[\S]+/g;
+      
     }
   },
   methods: {
