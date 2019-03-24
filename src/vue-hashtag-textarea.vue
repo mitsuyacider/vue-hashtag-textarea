@@ -31,6 +31,7 @@
     background: white;
     min-height: 120px;
     height: 100%;
+    width: 100%;
 
     // NOTE: Textarea layout. Fix position
     &__true-text {
@@ -169,8 +170,6 @@ export default {
         switch(type) {
           // NOTE: The textContent will be changed in the line, this type is called.
           case 'characterData':
-            const target = document.getElementById('input-true-text');    
-            const content = target.value
             this.replaceContent()
             break;
 
@@ -262,7 +261,6 @@ export default {
       const tagName = target.tagName
       if (tagName === 'I') {
         const content = target.textContent
-        console.log(target)
         this.$emit('onSelectHashtag', target)
       }
     },
