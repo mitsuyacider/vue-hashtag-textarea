@@ -1,6 +1,6 @@
 {
   "name": "vue-hashtag-textarea",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "private": false,
   "description": "Highlight hashtags on textarea with vue.js",
   "author": "Mitsuya Watanabe <mitsuya.watanabe85@gmail.com>",
