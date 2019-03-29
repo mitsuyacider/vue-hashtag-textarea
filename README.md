@@ -55,6 +55,7 @@ import VueHashtagTextarea from '/path/to/vue-hashtag-textarea.vue';
 ## Options
 | Options | Type | Description | Default |
 |:--|:--|:--|:--|
+| defaultContent | String | insert initial text | '' |
 | textColor | String | ordinary text color| black |
 | font | String | wave height | 14px "Noto Sans Japanese", sans-serif |
 | hashtagBackgroundColor | String | background color on hashtag| transparent |

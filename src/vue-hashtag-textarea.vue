@@ -81,6 +81,7 @@ export default {
       hashtagList: [],
       shouldShowPlaceholder: true,
       defaultOption: {
+          defaultContent: '',
           textColor: 'black',
           font: '14px "HiraKakuProN-W4-AlphaNum"',
           hashtagBackgroundColor: 'transparent',
@@ -112,6 +113,9 @@ export default {
                   };
     
     observer.observe(target, config);
+
+    // NOTE: Display initial content if exist
+    target.innerText = this.option.defaultContent
 
     const overlayElm = document.getElementById('input-overlay')
     overlayElm.addEventListener("click", this.onSelectHashtag, false);
